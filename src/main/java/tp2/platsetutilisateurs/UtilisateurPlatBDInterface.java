@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Interface d'accès aux données des utilisateurs
  */
-public interface UtilisateurBDInterface {
+public interface UtilisateurPlatBDInterface {
     /**
      *  Méthode fermant le dépôt où sont stockées les informations sur les utilisateurs
      */
@@ -23,4 +23,18 @@ public interface UtilisateurBDInterface {
      */
     public ArrayList<Utilisateur> getAllUtilisateurs() ;
 
+    /**
+     * Méthode retournant le plat dont le nom est passé en paramètre
+     *
+     * @param nomPlat Nom du plat recherché
+     * @return Un objet Plat représentant le plat recherché
+     */
+    public Plat getPlat(String nomPlat);
+
+    /**
+     * Méthode retournant la liste de tous les plats
+     *
+     * @return Une liste d'objets Plat
+     */
+    public ArrayList<Plat> getAllPlats();
 }

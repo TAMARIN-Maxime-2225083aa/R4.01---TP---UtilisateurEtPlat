@@ -12,22 +12,19 @@ public class UtilisateurPlatService {
     /**
      * Objet permettant d'accéder au dépôt où sont stockées les informations sur les utilisateurs
      */
-    protected UtilisateurBDInterface utilisateurBD;
+    protected UtilisateurPlatBDInterface utilisateurPlatBD;
 
     /**
      * Objet permettant d'accéder au dépôt où sont stockées les informations sur les plats
      */
-    protected PlatBDInterface  platBD;
 
     /**
      * Constructeur permettant d'injecter l'accès aux données
      *
-     * @param utilisateurBD objet implémentant l'interface d'accès aux données des utilisateur
-     * @param platBD objet implémentant l'interface d'accès aux données des plats
+     * @param utilisateurPlatBD objet implémentant l'interface d'accès aux données des utilisateur
      */
-    public UtilisateurPlatService(UtilisateurBDInterface utilisateurBD, PlatBDInterface platBD) {
-        this.utilisateurBD = utilisateurBD;
-        this.platBD = platBD;
+    public UtilisateurPlatService(UtilisateurPlatBDInterface utilisateurPlatBD) {
+        this.utilisateurPlatBD = utilisateurPlatBD;
     }
 
     /**
@@ -37,7 +34,7 @@ public class UtilisateurPlatService {
      */
     public String getAllUtilisateursJSON() {
 
-        ArrayList<Utilisateur> allUtilisateurs = utilisateurBD.getAllUtilisateurs();
+        ArrayList<Utilisateur> allUtilisateurs = utilisateurPlatBD.getAllUtilisateurs();
 
         // on supprime les informations sensibles
         for (Utilisateur utilisateur : allUtilisateurs) {
@@ -64,7 +61,7 @@ public class UtilisateurPlatService {
      */
     public String getUtilisateurJSON(String nom) {
         String result = null;
-        Utilisateur utilisateur = utilisateurBD.getUtilisateur(nom);
+        Utilisateur utilisateur = utilisateurPlatBD.getUtilisateur(nom);
 
         // si l'utilisateur a été trouvé
         if (utilisateur != null) {
@@ -85,7 +82,7 @@ public class UtilisateurPlatService {
      * @return une chaîne de caractère contenant les informations au format JSON
      */
     public String getAllPlatsJSON() {
-        ArrayList<Plat> allPlats = platBD.getAllPlats();
+        ArrayList<Plat> allPlats = utilisateurPlatBD.getAllPlats();
 
         // création du JSON et conversion de la liste des plats
         String result = null;
@@ -106,7 +103,7 @@ public class UtilisateurPlatService {
      */
     public String getPlatJSON(String nom) {
         String result = null;
-        Plat plat = platBD.getPlat(nom);
+        Plat plat = utilisateurPlatBD.getPlat(nom);
 
         // si le plat a été trouvé
         if (plat != null) {

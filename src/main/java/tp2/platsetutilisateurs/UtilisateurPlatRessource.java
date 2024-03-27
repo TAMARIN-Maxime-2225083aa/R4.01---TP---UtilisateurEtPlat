@@ -26,11 +26,10 @@ public class UtilisateurPlatRessource {
     /**
      * Constructeur permettant d'initialiser le service avec une interface d'accès aux données
      *
-     * @param utilisateurBD objet implémentant l'interface d'accès aux données des utilisateurs
-     * @param platBD objet implémentant l'interface d'accès aux données  des plats
+     * @param utilisateurPlatBD objet implémentant l'interface d'accès aux données des utilisateurs et des plats
      */
-    public @Inject UtilisateurPlatRessource(UtilisateurBDInterface utilisateurBD, PlatBDInterface platBD) {
-        this.service = new UtilisateurPlatService(utilisateurBD,platBD);
+    public @Inject UtilisateurPlatRessource(UtilisateurPlatBDInterface utilisateurPlatBD) {
+        this.service = new UtilisateurPlatService(utilisateurPlatBD);
     }
 
     /**
