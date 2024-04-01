@@ -12,10 +12,10 @@ public interface UtilisateurPlatBDInterface {
     public void close();
     /**
      * Méthode retournant l'utilisateur dont le nom est passée en paramètre
-     * @param nom nom de l'utilisateur recherché
+     * @param mail mail de l'utilisateur recherché
      * @return un objet Utilisateur représentant l'utilisateur recherché
      */
-    public Utilisateur getUtilisateur( String nom );
+    public Utilisateur getUtilisateur( String mail );
 
     /**
      * Méthode retournant la liste des utilisateurs

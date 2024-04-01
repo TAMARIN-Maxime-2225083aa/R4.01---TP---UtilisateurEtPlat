@@ -47,14 +47,14 @@ public class UtilisateurPlatRessource {
     /**
      * Endpoint permettant de publier les informations d'un utilisateur dont le nom est passé paramètre dans le chemin
      *
-     * @param nom nom de l'utilisateur recherché
+     * @param mail mail de l'utilisateur recherché
      * @return les informations de l'utilisateur recherché au format JSON
      */
     @GET
-    @Path("/utilisateurs/{nom}")
+    @Path("/utilisateurs/{mail}")
     @Produces("application/json")
-    public String getUtilisateur(@PathParam("nom") String nom) {
-        String result = service.getUtilisateurJSON(nom);
+    public String getUtilisateur(@PathParam("mail") String mail) {
+        String result = service.getUtilisateurJSON(mail);
         if (result == null)
             throw new NotFoundException();
         return result;

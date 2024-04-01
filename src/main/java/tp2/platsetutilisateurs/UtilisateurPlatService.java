@@ -56,12 +56,12 @@ public class UtilisateurPlatService {
     /**
      * Méthode retournant au format JSON les informations sur un utilisateur recherché
      *
-     * @param nom nom de l'utilisateur recherché
+     * @param mail mail de l'utilisateur recherché
      * @return une chaîne de caractère contenant les informations au format JSON
      */
-    public String getUtilisateurJSON(String nom) {
+    public String getUtilisateurJSON(String mail) {
         String result = null;
-        Utilisateur utilisateur = utilisateurPlatBD.getUtilisateur(nom);
+        Utilisateur utilisateur = utilisateurPlatBD.getUtilisateur(mail);
 
         // si l'utilisateur a été trouvé
         if (utilisateur != null) {

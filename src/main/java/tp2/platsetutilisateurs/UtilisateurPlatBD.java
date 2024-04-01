@@ -31,14 +31,14 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
     }
 
     @Override
-    public Utilisateur getUtilisateur(String nom) {
+    public Utilisateur getUtilisateur(String mail) {
         Utilisateur selectionUtilisateur = null;
 
-        String query = "SELECT * FROM Utilisateur WHERE nom=?";
+        String query = "SELECT * FROM Utilisateur WHERE mail=?";
 
         // construction et exécution d'une requête préparée
         try (PreparedStatement ps = dbConnection.prepareStatement(query)) {
-            ps.setString(1, nom);
+            ps.setString(1, mail);
 
             // exécution de la requête
             ResultSet result = ps.executeQuery();
@@ -46,12 +46,12 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
             // récupération du premier (et seul) tuple résultat
             // (si le nom renseigné est valide)
             if (result.next()) {
-                String nomUtilisateur = result.getString("nom");
+                String nom = result.getString("nom");
                 String mdp = result.getString("mdp");
-                String mail = result.getString("mail");
+                String mailUtilisateur = result.getString("mail");
 
                 // création et initialisation de l'objet Reservation
-                selectionUtilisateur = new Utilisateur(nomUtilisateur, mdp, mail);
+                selectionUtilisateur = new Utilisateur(nom, mdp, mailUtilisateur);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -74,12 +74,12 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
 
             // récupération des tuples résultat
             while (result.next()) {
-                String nomUtilisateur = result.getString("nom");
+                String nom = result.getString("nom");
                 String mdp = result.getString("mdp");
                 String mail = result.getString("mail");
 
                 // création de la réservation courante
-                Utilisateur utilisateurActuel = new Utilisateur(nomUtilisateur, mdp, mail);
+                Utilisateur utilisateurActuel = new Utilisateur(nom, mdp, mail);
 
                 listUtilisateurs.add(utilisateurActuel);
             }
@@ -91,11 +91,58 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
 
     @Override
     public Plat getPlat(String nomPlat) {
-        return null;
+        Plat selectionPlat = null;
+
+        String query = "SELECT * FROM Plat WHERE nomPlat=?";
+
+        // construction et exécution d'une requête préparée
+        try (PreparedStatement ps = dbConnection.prepareStatement(query)) {
+            ps.setString(1, nomPlat);
+
+            // exécution de la requête
+            ResultSet result = ps.executeQuery();
+
+            // récupération du premier (et seul) tuple résultat
+            // (si le nom renseigné est valide)
+            if (result.next()) {
+                String nom = result.getString("nomPlat");
+                float prix = result.getFloat("prix");
+
+                // création et initialisation de l'objet Reservation
+                selectionPlat = new Plat(nom, prix);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return selectionPlat;
     }
 
     @Override
     public ArrayList<Plat> getAllPlats() {
-        return null;
+        ArrayList<Plat> listPlats;
+
+        String query = "SELECT * FROM Plat";
+
+        // construction et exécution d'une requête préparée
+        try (PreparedStatement ps = dbConnection.prepareStatement(query)) {
+            // exécution de la requête
+            ResultSet result = ps.executeQuery();
+
+            listPlats = new ArrayList<>();
+
+            // récupération des tuples résultat
+            while (result.next()) {
+                String nom = result.getString("nomPlat");
+                float prix = result.getFloat("prix");
+
+                // création et initialisation de l'objet Reservation
+                Plat PlatActuel = new Plat(nom, prix);
+
+                listPlats.add(PlatActuel);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listPlats;
     }
 }

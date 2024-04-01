@@ -36,12 +36,4 @@ public class UtilisateurPlatApplication extends Application {
     private void closeDbConnection(@Disposes UtilisateurPlatBDInterface utilisateurBDInterface) {
         utilisateurBDInterface.close();
     }
-
-    /**
-     * Méthode appelée par l'API CDI pour injecter la connexion à la base de données au moment de la création
-     * de la ressource
-     *
-     * @return un objet implémentant l'interface PlatBDInterface utilisée
-     * pour accéder aux données des utilisateurs et des plats
-     */
 }
