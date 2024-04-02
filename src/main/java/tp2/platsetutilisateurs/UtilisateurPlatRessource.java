@@ -3,6 +3,7 @@ package tp2.platsetutilisateurs;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 
 /**
  * Ressource associée aux utilisateurs et aux plats

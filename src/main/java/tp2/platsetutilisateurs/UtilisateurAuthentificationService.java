@@ -1,5 +1,9 @@
 package tp2.platsetutilisateurs;
 
+import jakarta.ws.rs.NotFoundException;
+
+import java.lang.module.FindException;
+
 /**
  * Classe représentant le cas d'utilisation "authentifier un utilisateur"
  */
@@ -39,4 +43,20 @@ public class UtilisateurAuthentificationService {
         return true;
     }
 
+    // TODO faire commentaire
+    public boolean enregisteUtilisateur(String nom, String email, String mdp) {
+        boolean result = false;
+
+        // si un utilisateur a déjà cette adresse email on n'enregistre pas le nouveau utilisateur
+        Utilisateur utilisateur = utilisateurPlatBDInterface.getUtilisateur(email);
+
+        //si l'utilisateur est trouvé
+        if (utilisateur != null)
+            return result;
+
+        // si l'utilisateur est disponible
+        result = utilisateurPlatBDInterface.setNouveauUtilisateur(nom,email,mdp);
+
+        return result;
+    }
 }

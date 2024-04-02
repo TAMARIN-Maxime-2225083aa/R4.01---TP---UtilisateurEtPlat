@@ -37,4 +37,11 @@ public interface UtilisateurPlatBDInterface {
      * @return Une liste d'objets Plat
      */
     public ArrayList<Plat> getAllPlats();
+
+    /**
+     * Méthode retournant la liste de tous les plats
+     *
+     * @return Une liste d'objets Plat
+     */
+    public boolean setNouveauUtilisateur(String nom,String email, String mdp);
 }

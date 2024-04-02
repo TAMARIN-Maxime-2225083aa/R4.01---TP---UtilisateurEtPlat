@@ -2,10 +2,7 @@ package tp2.platsetutilisateurs;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
 import java.io.UnsupportedEncodingException;
@@ -51,4 +48,20 @@ public class UtilisateurAuthentificationRessource {
         // envoie d'une réponse avec la valeur de l'authentification
         return Response.ok(String.valueOf(res)).build();
     }
+
+    /**
+     * TODO faire commentaire
+     */
+    @POST
+    @Path("/register")
+    @Consumes("application/x-www-form-urlencoded")
+    public Response registerReservation(@FormParam("nom") String nom, @FormParam("mail") String mail,@FormParam("mdp") String mdp){
+
+        boolean res = auth.enregisteUtilisateur(nom, mail,mdp);
+
+        // renvoie true ou false selon si l'enregistrement ce passe bien ou non
+        return Response.ok(String.valueOf(res)).build();
+
+    }
+
 }

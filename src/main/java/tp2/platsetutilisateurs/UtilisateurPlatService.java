@@ -2,6 +2,7 @@ package tp2.platsetutilisateurs;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
+
 import java.util.ArrayList;
 
 /**

@@ -21,6 +21,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         dbConnection = DriverManager.getConnection( infoConnection, user, pwd ) ;
     }
 
+    // TODO faire commentaire
     @Override
     public void close() {
         try {
@@ -30,6 +31,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         }
     }
 
+    // TODO faire commentaire
     @Override
     public Utilisateur getUtilisateur(String mail) {
         Utilisateur selectionUtilisateur = null;
@@ -59,6 +61,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return selectionUtilisateur;
     }
 
+    // TODO faire commentaire
     @Override
     public ArrayList<Utilisateur> getAllUtilisateurs() {
         ArrayList<Utilisateur> listUtilisateurs;
@@ -89,6 +92,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return listUtilisateurs;
     }
 
+    // TODO faire commentaire
     @Override
     public Plat getPlat(String nomPlat) {
         Plat selectionPlat = null;
@@ -117,6 +121,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return selectionPlat;
     }
 
+    // TODO faire commentaire
     @Override
     public ArrayList<Plat> getAllPlats() {
         ArrayList<Plat> listPlats;
@@ -144,5 +149,30 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
             throw new RuntimeException(e);
         }
         return listPlats;
+    }
+
+    // TODO faire commentaire
+    @Override
+    public boolean setNouveauUtilisateur(String nom, String email, String mdp) {
+        boolean result = false;
+
+        String query = "INSERT INTO Utilisateur (nom,mail,mdp) VALUES (?,?,?)";
+
+        // construction et exécution d'une requête préparée
+        try (PreparedStatement ps = dbConnection.prepareStatement(query)) {
+            ps.setString(1, nom);
+            ps.setString(2, email);
+            ps.setString(3, mdp);
+            ps.executeUpdate();
+
+            result = true;
+            // exécution de la requête
+//            ResultSet resultat = ps.executeQuery();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
     }
 }
