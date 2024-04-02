@@ -111,9 +111,10 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
             if (result.next()) {
                 String nom = result.getString("nomPlat");
                 float prix = result.getFloat("prix");
+                String description = result.getString("description");
 
                 // création et initialisation de l'objet Reservation
-                selectionPlat = new Plat(nom, prix);
+                selectionPlat = new Plat(nom, prix, description);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -139,9 +140,10 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
             while (result.next()) {
                 String nom = result.getString("nomPlat");
                 float prix = result.getFloat("prix");
+                String description = result.getString("description");
 
                 // création et initialisation de l'objet Reservation
-                Plat PlatActuel = new Plat(nom, prix);
+                Plat PlatActuel = new Plat(nom, prix,description);
 
                 listPlats.add(PlatActuel);
             }
@@ -166,8 +168,6 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
             ps.executeUpdate();
 
             result = true;
-            // exécution de la requête
-//            ResultSet resultat = ps.executeQuery();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

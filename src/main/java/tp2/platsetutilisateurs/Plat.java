@@ -13,6 +13,11 @@ public class Plat {
     private float prix;
 
     /**
+     * Description du plat
+     */
+    private String description;
+
+    /**
      * Constructeur par défaut
      */
     public Plat() {
@@ -23,10 +28,12 @@ public class Plat {
      *
      * @param nomPlat Nom du plat
      * @param prix    Prix du plat
+     * @param description    Description du plat
      */
-    public Plat(String nomPlat, float prix) {
+    public Plat(String nomPlat, float prix, String description) {
         this.nomPlat = nomPlat;
         this.prix = prix;
+        this.description = description;
     }
 
     /**
@@ -65,11 +72,20 @@ public class Plat {
         this.prix = prix;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Plat{" +
                 "nomPlat='" + nomPlat + '\'' +
-                ", prix=" + prix +
+                ", prix=" + prix + '\'' +
+                ", description=" +description +
                 '}';
     }
 }
