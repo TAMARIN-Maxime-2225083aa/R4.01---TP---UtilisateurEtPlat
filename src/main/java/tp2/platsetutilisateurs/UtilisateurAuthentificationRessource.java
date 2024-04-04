@@ -28,7 +28,7 @@ public class UtilisateurAuthentificationRessource {
      * Constructeur permettant d'initialiser le service avec une interface d'accès aux données
      * @param utilisateurBDInterface objet implémentant l'interface d'accès aux données
      */
-    public @Inject UtilisateurAuthentificationRessource(UtilisateurPlatBDInterface utilisateurBDInterface ){
+    public @Inject UtilisateurAuthentificationRessource(UtilisateurBDInterface utilisateurBDInterface ){
         this.auth = new UtilisateurAuthentificationService( utilisateurBDInterface ) ;
     }
 

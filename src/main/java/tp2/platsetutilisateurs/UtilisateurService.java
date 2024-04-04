@@ -13,14 +13,14 @@ public class UtilisateurService {
     /**
      * Objet permettant d'accéder au dépôt où sont stockées les informations sur les utilisateurs
      */
-    protected UtilisateurPlatBDInterface utilisateurBD;
+    protected UtilisateurBDInterface utilisateurBD;
 
     /**
      * Constructeur permettant d'injecter l'accès aux données
      *
      * @param utilisateurBD objet implémentant l'interface d'accès aux données des utilisateurs
      */
-    public UtilisateurService(UtilisateurPlatBDInterface utilisateurBD) {
+    public UtilisateurService(UtilisateurBDInterface utilisateurBD) {
         this.utilisateurBD = utilisateurBD;
     }
 

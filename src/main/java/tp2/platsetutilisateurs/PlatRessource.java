@@ -29,7 +29,7 @@ public class PlatRessource {
      *
      * @param platBD objet implémentant l'interface d'accès aux données des plats
      */
-    public @Inject PlatRessource(UtilisateurPlatBDInterface platBD) {
+    public @Inject PlatRessource(PlatBDInterface platBD) {
         this.service = new PlatService(platBD);
     }
 

@@ -29,7 +29,7 @@ public class UtilisateurRessource {
      *
      * @param utilisateurBD objet implémentant l'interface d'accès aux données des utilisateurs
      */
-    public @Inject UtilisateurRessource(UtilisateurPlatBDInterface utilisateurBD) {
+    public @Inject UtilisateurRessource(UtilisateurBDInterface utilisateurBD) {
         this.service = new UtilisateurService(utilisateurBD);
     }
 

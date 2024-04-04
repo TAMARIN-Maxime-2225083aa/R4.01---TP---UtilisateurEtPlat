@@ -8,15 +8,15 @@ public class UtilisateurAuthentificationService {
     /**
      * Objet permettant d'accéder au dépôt où sont stockées les informations sur les utilisateurs
      */
-    protected UtilisateurPlatBDInterface utilisateurPlatBDInterface;
+    protected UtilisateurBDInterface utilisateurBDInterface;
 
     /**
      * Constructeur permettant d'injecter l'accès aux données
      *
-     * @param utilisateurPlatBDInterface objet implémentant l'interface d'accès aux données
+     * @param utilisateurBDInterface objet implémentant l'interface d'accès aux données
      */
-    public UtilisateurAuthentificationService(UtilisateurPlatBDInterface utilisateurPlatBDInterface) {
-        this.utilisateurPlatBDInterface = utilisateurPlatBDInterface;
+    public UtilisateurAuthentificationService(UtilisateurBDInterface utilisateurBDInterface) {
+        this.utilisateurBDInterface = utilisateurBDInterface;
     }
 
     /**
@@ -28,7 +28,7 @@ public class UtilisateurAuthentificationService {
      */
     public boolean isValidUser(String mail, String mdp) {
 
-        Utilisateur currentUser = utilisateurPlatBDInterface.getUtilisateur(mail);
+        Utilisateur currentUser = utilisateurBDInterface.getUtilisateur(mail);
 
         // si l'utilisateur n'a pas été trouvé
         if (currentUser == null)

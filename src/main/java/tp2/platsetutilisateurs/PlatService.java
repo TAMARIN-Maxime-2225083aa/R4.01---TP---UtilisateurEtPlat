@@ -13,14 +13,14 @@ public class PlatService {
     /**
      * Objet permettant d'accéder au dépôt où sont stockées les informations sur les plats
      */
-    protected UtilisateurPlatBDInterface platBD;
+    protected PlatBDInterface platBD;
 
     /**
      * Constructeur permettant d'injecter l'accès aux données
      *
      * @param platBD objet implémentant l'interface d'accès aux données des plats
      */
-    public PlatService(UtilisateurPlatBDInterface platBD) {
+    public PlatService(PlatBDInterface platBD) {
         this.platBD = platBD;
     }
 
@@ -108,7 +108,7 @@ public class PlatService {
             return result;
 
         // on vérifie que les infos à mettre à jour ne sont pas identique aux infos actuel
-        if (!(Double.parseDouble(prix) - plat.prix < 0.00001)  || !description.equals(plat.description))
+        if (!(Double.parseDouble(prix) - plat.prix < 0.00001) || !description.equals(plat.description))
             result = platBD.modificationPlat(nom, prix, description);
 
         return result;
