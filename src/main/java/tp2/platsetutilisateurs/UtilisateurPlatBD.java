@@ -3,6 +3,9 @@ package tp2.platsetutilisateurs;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Cette classe gère l'accès à la base de données pour les utilisateurs et les plats.
+ */
 public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
     /**
      * Accès à la base de données (session)
@@ -10,18 +13,23 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
     protected Connection dbConnection ;
 
     /**
-     * Constructeur de la classe
+     * Constructeur de la classe.
+     *
      * @param infoConnection chaîne de caractères avec les informations de connexion
      *                       (p.ex. jdbc:mariadb://mysql-[compte].alwaysdata.net/[compte]_library_db
      * @param user chaîne de caractères contenant l'identifiant de connexion à la base de données
      * @param pwd chaîne de caractères contenant le mot de passe à utiliser
+     * @throws SQLException en cas d'erreur lors de la connexion à la base de données
+     * @throws ClassNotFoundException si la classe du pilote JDBC n'est pas trouvée
      */
     public UtilisateurPlatBD(String infoConnection, String user, String pwd ) throws java.sql.SQLException, java.lang.ClassNotFoundException {
         Class.forName("org.mariadb.jdbc.Driver");
         dbConnection = DriverManager.getConnection( infoConnection, user, pwd ) ;
     }
 
-    // TODO faire commentaire
+    /**
+     * Ferme la connexion à la base de données.
+     */
     @Override
     public void close() {
         try {
@@ -31,7 +39,12 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         }
     }
 
-    // TODO faire commentaire
+    /**
+     * Récupère un utilisateur à partir de son adresse e-mail.
+     *
+     * @param mail l'adresse e-mail de l'utilisateur à récupérer
+     * @return l'objet Utilisateur correspondant à l'adresse e-mail spécifiée, ou null si aucun utilisateur correspondant n'est trouvé
+     */
     @Override
     public Utilisateur getUtilisateur(String mail) {
         Utilisateur selectionUtilisateur = null;
@@ -52,7 +65,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
                 String mdp = result.getString("mdp");
                 String mailUtilisateur = result.getString("mail");
 
-                // création et initialisation de l'objet Reservation
+                // création et initialisation de l'objet Utilisateur
                 selectionUtilisateur = new Utilisateur(nom, mdp, mailUtilisateur);
             }
         } catch (SQLException e) {
@@ -61,7 +74,11 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return selectionUtilisateur;
     }
 
-    // TODO faire commentaire
+    /**
+     * Récupère tous les utilisateurs de la base de données.
+     *
+     * @return une liste d'objets Utilisateur représentant tous les utilisateurs dans la base de données
+     */
     @Override
     public ArrayList<Utilisateur> getAllUtilisateurs() {
         ArrayList<Utilisateur> listUtilisateurs;
@@ -81,7 +98,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
                 String mdp = result.getString("mdp");
                 String mail = result.getString("mail");
 
-                // création de la réservation courante
+                // création de l'utilisateur courant
                 Utilisateur utilisateurActuel = new Utilisateur(nom, mdp, mail);
 
                 listUtilisateurs.add(utilisateurActuel);
@@ -92,7 +109,12 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return listUtilisateurs;
     }
 
-    // TODO faire commentaire
+    /**
+     * Récupère un plat à partir de son nom.
+     *
+     * @param nomPlat le nom du plat à récupérer
+     * @return l'objet Plat correspondant au nom spécifié, ou null si aucun plat correspondant n'est trouvé
+     */
     @Override
     public Plat getPlat(String nomPlat) {
         Plat selectionPlat = null;
@@ -113,7 +135,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
                 float prix = result.getFloat("prix");
                 String description = result.getString("description");
 
-                // création et initialisation de l'objet Reservation
+                // création et initialisation de l'objet Plat
                 selectionPlat = new Plat(nom, prix, description);
             }
         } catch (SQLException e) {
@@ -122,7 +144,11 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return selectionPlat;
     }
 
-    // TODO faire commentaire
+    /**
+     * Récupère tous les plats de la base de données.
+     *
+     * @return une liste d'objets Plat représentant tous les plats dans la base de données
+     */
     @Override
     public ArrayList<Plat> getAllPlats() {
         ArrayList<Plat> listPlats;
@@ -142,7 +168,7 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
                 float prix = result.getFloat("prix");
                 String description = result.getString("description");
 
-                // création et initialisation de l'objet Reservation
+                // création de l'objet Plat courant
                 Plat PlatActuel = new Plat(nom, prix,description);
 
                 listPlats.add(PlatActuel);
@@ -153,14 +179,21 @@ public class UtilisateurPlatBD implements UtilisateurPlatBDInterface {
         return listPlats;
     }
 
-    // TODO faire commentaire
+    /**
+     * Ajoute un nouvel utilisateur à la base de données.
+     *
+     * @param nom le nom de l'utilisateur
+     * @param email l'adresse e-mail de l'utilisateur
+     * @param mdp le mot de passe de l'utilisateur
+     * @return true si l'ajout est réussi, false sinon
+     */
     @Override
     public boolean setNouveauUtilisateur(String nom, String email, String mdp) {
         boolean result = false;
 
         String query = "INSERT INTO Utilisateur (nom,mail,mdp) VALUES (?,?,?)";
 
-        // construction et exécution d'une requête préparée
+        // construction et exécution d'une requête pré
         try (PreparedStatement ps = dbConnection.prepareStatement(query)) {
             ps.setString(1, nom);
             ps.setString(2, email);

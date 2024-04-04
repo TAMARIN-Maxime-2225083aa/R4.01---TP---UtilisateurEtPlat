@@ -26,9 +26,9 @@ public class Plat {
     /**
      * Constructeur de plat
      *
-     * @param nomPlat Nom du plat
-     * @param prix    Prix du plat
-     * @param description    Description du plat
+     * @param nomPlat     Nom du plat
+     * @param prix        Prix du plat
+     * @param description Description du plat
      */
     public Plat(String nomPlat, float prix, String description) {
         this.nomPlat = nomPlat;
@@ -46,21 +46,21 @@ public class Plat {
     }
 
     /**
-     * Méthode permettant d'accéder au prix du plat
-     *
-     * @return Un float représentant le prix du plat
-     */
-    public float getPrix() {
-        return prix;
-    }
-
-    /**
      * Méthode permettant de modifier le nom du plat
      *
      * @param nomPlat Nouveau nom du plat
      */
     public void setNomPlat(String nomPlat) {
         this.nomPlat = nomPlat;
+    }
+
+    /**
+     * Méthode permettant d'accéder au prix du plat
+     *
+     * @return Un float représentant le prix du plat
+     */
+    public float getPrix() {
+        return prix;
     }
 
     /**
@@ -72,10 +72,20 @@ public class Plat {
         this.prix = prix;
     }
 
+    /**
+     * Méthode permettant d'accéder à la description d'un plat
+     *
+     * @return Un String représentant la description d'un plat
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Méthode permettant de modifier la description du plat
+     *
+     * @param description Nouveau description du plat
+     */
     public void setDescription(String description) {
         this.description = description;
     }
@@ -85,7 +95,7 @@ public class Plat {
         return "Plat{" +
                 "nomPlat='" + nomPlat + '\'' +
                 ", prix=" + prix + '\'' +
-                ", description=" +description +
+                ", description=" + description +
                 '}';
     }
 }
