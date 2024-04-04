@@ -72,4 +72,72 @@ public class UtilisateurService {
         }
         return result;
     }
+
+    /**
+     * Méthode permettant la modification d'un utilisateur
+     *
+     * @param nom   nom de l'utilisateur
+     * @param email mail de l'utilisateur
+     * @param mdp   mot de passe de l'utilisateur
+     * @return true si modification fait. Faux sinon.
+     */
+    public boolean enregisteUtilisateur(String nom, String email, String mdp) {
+        boolean result = false;
+
+        // si un utilisateur a déjà cette adresse email on n'enregistre pas le nouveau utilisateur
+        Utilisateur utilisateur = utilisateurBD.getUtilisateur(email);
+
+        //si l'utilisateur est trouvé
+        if (utilisateur != null)
+            return result;
+
+        // si l'utilisateur est disponible
+        result = utilisateurBD.nouveauUtilisateur(nom, email, mdp);
+
+        return result;
+    }
+
+    /**
+     * Méthode permettant de modifier les informations d'un utilisateur
+     *
+     * @param nom   nom de l'utilisateur
+     * @param email mail de l'utilisateur
+     * @param mdp   mot de passe de l'utilisateur
+     * @return un booleen en fonction de la réussite de la modification
+     */
+    public boolean modificationUtilisateur(String nom, String email, String mdp) {
+        boolean result = false;
+
+        Utilisateur utilisateur = utilisateurBD.getUtilisateur(email);
+
+        // si pas d'utilisateur avec cette adresse mail on sort
+        if (utilisateur == null)
+            return result;
+
+        // on vérifie que les infos à mettre à jour ne sont pas identique aux infos actuel
+        if (!nom.equals(utilisateur.nom) || !mdp.equals(utilisateur.mdp))
+            result = utilisateurBD.modificationUtilisateur(nom, email, mdp);
+
+        return result;
+    }
+
+    /**
+     * Méthode permettant de supprimer un utilisateur
+     *
+     * @param email mail de l'utilisateur
+     * @return un booleen en fonction de la réussite de la modification
+     */
+    public boolean suppressionUtilisateur(String email) {
+        boolean result = false;
+
+        Utilisateur utilisateur = utilisateurBD.getUtilisateur(email);
+
+        // si pas d'utilisateur avec cette adresse mail on retourne faux
+        if (utilisateur == null)
+            return result;
+
+        result = utilisateurBD.suppressionUtilisateur(email);
+
+        return result;
+    }
 }

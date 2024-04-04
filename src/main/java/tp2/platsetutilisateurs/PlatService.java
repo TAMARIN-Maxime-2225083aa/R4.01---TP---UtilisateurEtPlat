@@ -65,4 +65,72 @@ public class PlatService {
         }
         return result;
     }
+
+    /**
+     * Méthode permettant l'ajout d'un plat
+     *
+     * @param nom         nom du plat
+     * @param prix        prix du plat
+     * @param description description du plat
+     * @return true si l'enregistrement fait. Faux sinon.
+     */
+    public boolean enregistePlat(String nom, String prix, String description) {
+        boolean result = false;
+
+        // si un plat a déjà ce nom on n'enregistre pas le nouveau plat
+        Plat plat = platBD.getPlat(nom);
+
+        //si le plat est trouvé
+        if (plat != null)
+            return result;
+
+        // si le nom libre
+        result = platBD.nouveauPlat(nom, prix, description);
+
+        return result;
+    }
+
+    /**
+     * Méthode permettant de modifier les informations d'un plat
+     *
+     * @param nom         nom du plat
+     * @param prix        prix du plat
+     * @param description description du plat
+     * @return un booleen en fonction de la réussite de la modification
+     */
+    public boolean modificationPlat(String nom, String prix, String description) {
+        boolean result = false;
+
+        Plat plat = platBD.getPlat(nom);
+
+        // si pas de plat avec ce nom on sort
+        if (plat == null)
+            return result;
+
+        // on vérifie que les infos à mettre à jour ne sont pas identique aux infos actuel
+        if (!(Double.parseDouble(prix) - plat.prix < 0.00001)  || !description.equals(plat.description))
+            result = platBD.modificationPlat(nom, prix, description);
+
+        return result;
+    }
+
+    /**
+     * Méthode permettant de supprimer un plat
+     *
+     * @param nom nom du plat
+     * @return un booleen en fonction de la réussite de la modification
+     */
+    public boolean suppressionPlat(String nom) {
+        boolean result = false;
+
+        Plat plat = platBD.getPlat(nom);
+
+        // si pas de plat avec ce nom on retourne faux
+        if (plat == null)
+            return result;
+
+        result = platBD.suppressionPlat(nom);
+
+        return result;
+    }
 }

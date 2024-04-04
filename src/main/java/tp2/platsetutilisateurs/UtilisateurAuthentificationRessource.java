@@ -49,19 +49,4 @@ public class UtilisateurAuthentificationRessource {
         return Response.ok(String.valueOf(res)).build();
     }
 
-    /**
-     * TODO faire commentaire
-     */
-    @POST
-    @Path("/register")
-    @Consumes("application/x-www-form-urlencoded")
-    public Response registerReservation(@FormParam("nom") String nom, @FormParam("mail") String mail,@FormParam("mdp") String mdp){
-
-        boolean res = auth.enregisteUtilisateur(nom, mail,mdp);
-
-        // renvoie true ou false selon si l'enregistrement ce passe bien ou non
-        return Response.ok(String.valueOf(res)).build();
-
-    }
-
 }

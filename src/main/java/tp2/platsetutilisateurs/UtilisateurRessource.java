@@ -3,6 +3,7 @@ package tp2.platsetutilisateurs;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 
 /**
  * Ressource associée aux utilisateurs
@@ -57,5 +58,59 @@ public class UtilisateurRessource {
         if (result == null)
             throw new NotFoundException();
         return result;
+    }
+
+    /**
+     * Endpoint permettant d'enregister les informations d'un utilisateur
+     *
+     * @param nom  nom du nouveau utilisateur
+     * @param mail mail du nouveau utilisateur
+     * @param mdp  mot de passe du nouveau utilisateur
+     * @return un bolean selon l'issue de l'enregistement
+     */
+    @POST
+    @Path("/nouveau")
+    @Consumes("application/x-www-form-urlencoded")
+    public Response enregistreUtilisateur(@FormParam("nom") String nom, @FormParam("mail") String mail, @FormParam("mdp") String mdp) {
+
+        boolean res = service.enregisteUtilisateur(nom, mail, mdp);
+
+        // renvoie true ou false selon si l'enregistrement se passe bien ou non
+        return Response.ok(String.valueOf(res)).build();
+    }
+
+    /**
+     * Endpoint permettant de mettre à jour les informations d'un utilisateur
+     *
+     * @param nom  nom du nouveau utilisateur
+     * @param mail mail du nouveau utilisateur
+     * @param mdp  mot de passe du nouveau utilisateur
+     * @return un booleen selon l'issue de l'enregistement
+     */
+    @POST
+    @Path("/modification")
+    @Consumes("application/x-www-form-urlencoded")
+    public Response miseAJourUtilisateur(@FormParam("nom") String nom, @FormParam("mail") String mail, @FormParam("mdp") String mdp) {
+
+        boolean res = service.modificationUtilisateur(nom, mail, mdp);
+
+        // renvoie true ou false selon si la mise à jour se passe bien ou non
+        return Response.ok(String.valueOf(res)).build();
+    }
+
+    /**
+     * Endpoint permettant de supprimer un utilisateur
+     *
+     * @param mail mail de l'utilisateur
+     * @return un booleen selon l'issue de la suppression
+     */
+    @DELETE
+    @Path("{mail}")
+    public Response supprimeUtilisateur(@PathParam("mail") String mail) {
+
+        boolean res = service.suppressionUtilisateur(mail);
+
+        // renvoie true ou false selon si la suppression se passe bien ou non
+        return Response.ok(String.valueOf(res)).build();
     }
 }

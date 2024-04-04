@@ -5,17 +5,17 @@ public class Plat {
     /**
      * Nom du plat
      */
-    private String nomPlat;
+    protected String nomPlat;
 
     /**
      * Prix du plat
      */
-    private float prix;
+    protected float prix;
 
     /**
      * Description du plat
      */
-    private String description;
+    protected String description;
 
     /**
      * Constructeur par défaut
