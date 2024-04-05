@@ -36,10 +36,9 @@ public class UtilisateurAuthentificationRessource {
      * Enpoint permettant de publier de tous les utilisateurs enregistrés
      * @return la liste des utilisateurs (avec leurs informations) au format JSON
      */
-    @GET
-    @Path("mail={mail}&mdp={mdp}")
-    @Produces("text/plain")
-    public Response authenticate(@PathParam("mail") String mail, @PathParam("mdp") String mdp ) throws UnsupportedEncodingException {
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    public Response authenticate(@FormParam("mail") String mail, @FormParam("mdp") String mdp ) throws UnsupportedEncodingException {
         boolean res = false;
 
         // authentification
